@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reservas</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/maquetado.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/bootstrap.css'>
+
+</head>
+
+<body onload="modal(); validacion(); listarReservas(); comboCliente(); comboFinca();">
+    <div class="contenedor">
+        <header class="menus">
+        </header>
+        <div class="titulo">
+            <h1>Reservas</h1>
+        </div>
+        <div class="formulario">
+            <form class="campos needs-validation" action="javascript:guardarReserva();" novalidate>
+                <div class="form-floating mb-3" id="client">
+                    
+                </div>
+
+                <div class="form-floating mb-3" id="farm">
+                    
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date"  id="startDate" class="form-control" required placeholder="Fecha de Inicio">
+                    <label for="startDate" >Fecha de Inicio</label>
+                </div>  
+                <div class="form-floating mb-3">
+                    <input type="date"  id="devolutionDate" class="form-control" required placeholder="Fecha de Fin">
+                    <label for="devolutionDate" >Fecha de Fin</label>
+                </div>                
+                <div class="boton">
+                    <button type="submit" class="btn btn-outline-primary" value="Guardar">Guardar</button>
+                </div>
+            </form>
+        </div>
+        <div class="listado table-responsive" id="listado"></div>
+        <div class="pie">
+            Elaborado por el grupo G15 - 3
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="ModalEstatico" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel">Actualizar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="campos needs-validation" id="fModal" action="javascript:actualizarReserva();" novalidate>
+                        <div class="form-floating mb-3">
+                            <input type="number" id="m_idReservation" class="form-control" required placeholder="id" hidden="true">
+                            <label for="m_idReservation">id</label>
+                        </div>
+                        <div class="form-floating mb-3" id="m_client">
+
+                        </div>
+        
+                        <div class="form-floating mb-3" id="m_farm">
+        
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="date"  id="m_startDate" class="form-control" required placeholder="Fecha de Inicio">
+                            <label for="m_startDate" >Fecha de Inicio</label>
+                        </div>  
+                        <div class="form-floating mb-3">
+                            <input type="date"  id="m_devolutionDate" class="form-control" required placeholder="Fecha de Fin">
+                            <label for="m_devolutionDate" >Fecha de Fin</label>
+                        </div> 
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" value="Guardar">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/general.js"></script>
+    <script type="text/javascript" src="./js/reserva.js"></script>
+    <script type="text/javascript" src="./js/cliente.js"></script>
+    <script type="text/javascript" src="./js/finca.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.menus').load('./menu.html');
+        });
+    </script>
+</body>
+
+</html>
