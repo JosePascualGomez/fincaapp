@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reportes</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/maquetado.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/bootstrap.css'>
+
+</head>
+
+<body >
+    <div class="contenedor">
+        <header class="menus">
+        </header>
+        <div class="titulo">
+            <h1>Reportes</h1>
+        </div>
+        <div class="formulario">
+            <div class="campos">
+                <div class="form-floating mb-3">
+                    <button type="button" onclick="clienteReservaTotal();" class="btn btn-primary">Conteo de Reservas</button>
+                </div>
+                <div class="form-floating mb-3">
+                    <button type="button" onclick="ConteoReservas();" class="btn btn-primary">Completas vs Canceladas</button>
+                </div>
+
+                <form class="campos needs-validation" action="javascript:listarReservasEntreFechas();" novalidate>
+                    <div class="form-floating mb-3">
+                        <input type="date"  id="startDate" class="form-control" required placeholder="Fecha de Inicio">
+                        <label for="startDate" >Fecha de Inicio</label>
+                    </div>  
+                    <div class="form-floating mb-3">
+                        <input type="date"  id="finishDate" class="form-control" required placeholder="Fecha de Fin">
+                        <label for="finishDate" >Fecha de Fin</label>
+                    </div>  
+                    <div class="boton">
+                        <button type="submit" class="btn btn-primary" value="TopClientes">Top Clientes</button>
+                    </div>
+                    <!--
+                    <div class="form-floating mb-3">
+                        <button type="button" onclick="listarReservasEntreFechas();" class="btn btn-primary">Top Clientes</button>
+                    </div>                
+                    -->
+                </form>
+            </div>            
+        </div>
+        <div class="listado table-responsive" id="listado"></div>
+        <div class="pie">
+            Elaborado por el grupo G15 - 3
+        </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/general.js"></script>
+    <script type="text/javascript" src="./js/reserva.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.menus').load('./menu.html');
+        });
+    </script>
+</body>
+
+</html>

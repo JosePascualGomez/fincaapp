@@ -1,5 +1,6 @@
 package co.edu.usa.fincaapp.servicios;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,67 +8,139 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.usa.fincaapp.Repositorios.ReservationRepository;
+import co.edu.usa.fincaapp.dto.ClientTotalRes;
+import co.edu.usa.fincaapp.dto.ClientTotalResInter;
 import co.edu.usa.fincaapp.entidades.Reservation;
 
+/**
+ * @apiNote Expone los servicios que dan acceso a los métodos del crud
+ * @author José Pascual Gómez Blanco
+ * @serial 21/10/2021
+ * @version 1.0
+ */
 @Service
 public class ReservationService {
+    
+    /**
+     * Interface que permite el crud
+     */
     @Autowired
     public
-    ReservationRepository reservationRepository;
+    ReservationRepository reservaRepository;
 
+    /**
+     * Listar el total de reservaciones
+     * @return listado de reservaciones
+     */
     public List<Reservation> getReservations(){
-        return reservationRepository.getReservations();
+        return reservaRepository.getReservations();
     }
 
-    public Optional<Reservation> getReservation(Long id){
-        return reservationRepository.getReservationById(id);
+    /**
+     * Permite conseguir una reservación
+     * @param idReservation
+     * @return La reservación buscada por Id
+     */
+    public Optional<Reservation> getReservation(Long idReservation){
+        return reservaRepository.getReservationById(idReservation);
     }
 
+    /**
+     * Permite crear una reservación
+     * @param reservation
+     * @return La reservación creada
+     */
     public Reservation saveReservation(Reservation reservation){
-        return reservationRepository.saveReservation(reservation);
+        return reservaRepository.saveReservation(reservation);
     }
     
+    /**
+     * Permite actualizar una reservación
+     * @param reservation 
+     * @return La reservación actualizada
+     */
     public Reservation updateReservation(Reservation reservation){
         if (reservation != null) {
             if (reservation.getIdReservation() != null){
                 Optional<Reservation> oReservation = getReservation(reservation.getIdReservation());
                 if (!oReservation.isEmpty()){
-                    Reservation res = oReservation.get();
+                    Reservation reserva = oReservation.get();
                     if (reservation.getStartDate() !=null){
-                        res.setStartDate(reservation.getStartDate());
+                        reserva.setStartDate(reservation.getStartDate());
                     }
                     if (reservation.getDevolutionDate() !=null){
-                        res.setDevolutionDate(reservation.getDevolutionDate());
+                        reserva.setDevolutionDate(reservation.getDevolutionDate());
                     }
                     if (reservation.getStatus() !=null){
-                        res.setStatus(reservation.getStatus());
+                        reserva.setStatus(reservation.getStatus());
                     }
 
                     if (reservation.getFarm() !=null){
-                        res.setFarm(reservation.getFarm());
+                        reserva.setFarm(reservation.getFarm());
                     }              
                     if (reservation.getClient() !=null){
-                        res.setClient(reservation.getClient());
+                        reserva.setClient(reservation.getClient());
                     }   
                     if (reservation.getScore() !=null){
-                        res.setScore(reservation.getScore());
+                        reserva.setScore(reservation.getScore());
                     }            
 
-                    return reservationRepository.saveReservation(res);
+                    return reservaRepository.saveReservation(reserva);
                 }
             }
         }
         return reservation;
     }
     
+    /**
+     * Permite eliminar todas las reservaciones
+     */
     public void deleteAll(){
-        reservationRepository.deleteAll();
+        reservaRepository.deleteAll();
     }
 
-    public void delete(Long id){
-        Optional<Reservation> oReservation = getReservation(id);
+    /**
+     * Permite eliminar una reservación 
+     * @param idReservation
+     */
+    public void delete(Long idReservation){
+        Optional<Reservation> oReservation = getReservation(idReservation);
         if (!oReservation.isEmpty()){
-            reservationRepository.deleteReservation(oReservation.get());                        
+            reservaRepository.deleteReservation(oReservation.get());                        
         }        
+    }
+
+    /**
+     * Permite listar las reservaciones entre dos fechas
+     * @param first Fecha inicial
+     * @param finish Fecha Final
+     * @return Listado de Reservaciones
+     */
+    public List<Reservation> findAllByStartDateBetween(Date first, Date finish){
+        return reservaRepository.findAllByStartDateBetween(first, finish);
+    }
+
+    /**
+     * 
+     * @return Retorna la cantidad reservaciones completadas y canceladas
+     */
+    public Object getCountStatus(){
+        return reservaRepository.getCountStatus();
+    }
+
+    /**
+     * 
+     * @return Retorna un listado de clientes y total reservas
+     */
+    public List<ClientTotalRes> CountByClient(){
+        return reservaRepository.CountByClient();
+    }
+
+    /**
+     * 
+     * @return Retorna un listado de clientes y total reservas, usando interfaz como DTO
+     */
+    public List<ClientTotalResInter> countByClientInters(){
+        return reservaRepository.countByClientInters();
     }
 }

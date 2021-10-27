@@ -11,12 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.usa.fincaapp.entidades.Client;
 import co.edu.usa.fincaapp.servicios.ClientService;
 
+/**
+ * @apiNote Expone los servicios de prueba
+ * @author José Pascual Gómez Blanco
+ * @serial 24/10/2021
+ */
 @RestController
 @RequestMapping(path = "/api")
 public class Api {
     @Autowired
     ClientService clientServicio;
 
+    /**
+     * 
+     * @return Un listado de los clientes creados
+     */
     @RequestMapping(
             method=RequestMethod.GET, 
             path = "/client",

@@ -180,3 +180,127 @@ function EliminarReserva(id){
     });
 }
 
+
+
+function ConteoReservas(){
+    let urlA= urlApi() +"/Reservation/report-status";
+    $.ajax({
+        url: urlA,
+        type: "GET",
+        dataType:  "json",
+        success: function(respuesta){
+            console.log(respuesta);
+            $("#listado").html("");
+            
+            let myTable = '<table class="table table-bordered">';
+            myTable += '<thead class="table-dark">';
+            myTable += "<tr>";
+            myTable += "<th>Reservas Completas</th>";
+            myTable += "<th>Reservas Canceladas</th>";
+            myTable += "</tr>";
+            myTable += "</thead><tbody>"
+            for(i=0;i<respuesta.length ;i++){       
+                myTable += "<tr>";
+                myTable += "<td>"+respuesta[i].completed+"</td>";
+                myTable += "<td>"+respuesta[i].cancelled+"</td>";
+                myTable += '</tr>';     
+            }
+            myTable += "</tbody>";
+            myTable += "</table>";
+            $("#listado").html(myTable);
+
+        },
+        error:function(){
+            console.log('error');
+        }
+
+    })
+}
+
+
+function clienteReservaTotal(){
+    let urlA= urlApi() +"/Reservation/report-clients";
+    $.ajax({
+        url: urlA,
+        type: "GET",
+        dataType:  "json",
+        success: function(respuesta){
+            console.log(respuesta);
+            $("#listado").html("");
+            
+            let myTable = '<table class="table table-bordered">';
+            myTable += '<thead class="table-dark">';
+            myTable += "<tr>";
+            myTable += "<th>id Cliente</th>";
+            myTable += "<th>Cliente</th>";
+            myTable += "<th>Nro. Reservas</th>";
+            myTable += "</tr>";
+            myTable += "</thead><tbody>"
+            for(i=0;i<respuesta.length ;i++){       
+                myTable += "<tr>";
+                myTable += "<td>"+items[i]?.client?.idClient+"</td>";        
+                myTable += "<td>"+items[i]?.client?.name+"</td>";
+                myTable += "<td>"+respuesta[i].total+"</td>";
+                myTable += '</tr>';     
+            }
+            myTable += "</tbody>";
+            myTable += "</table>";
+            $("#listado").html(myTable);
+
+        },
+        error:function(){
+            console.log('error');
+        }
+
+    })
+}
+
+
+function listarReservasEntreFechas(){
+    let urlA= urlApi() +"/Reservation/report-dates/"+ $("#startDate").val()+"/"+$("#finishDate").val() ;
+    $.ajax({
+        url: urlA,
+        type: "GET",
+        dataType:  "json",
+        success: function(items){
+            console.log(items);
+            $("#listado").html("");
+            
+            let myTable = '<table class="table table-bordered">';
+            myTable += '<thead class="table-dark">';
+            myTable += "<tr>";
+            myTable += "<th>Id</th>";
+            myTable += "<th>Finca</th>";
+            myTable += "<th>Inicio</th>";
+            myTable += "<th>Final</th>";
+            myTable += "<th>Id Cliente</th>";
+            myTable += "<th>Nombre Cliente</th>";
+            myTable += "<th>eMail Cliente</th>";
+            myTable += "<th>Calificación</th>";
+            myTable += "</tr>";
+            myTable += "</thead><tbody>"
+            for(i=0;i<items.length ;i++){
+                var score = (items[i]?.score)==null?"":items[i]?.score;
+                var eMail = (items[i]?.client?.email)==null?"":items[i]?.client?.email;        
+                myTable += "<tr>";
+                myTable += "<td>"+items[i].idReservation+"</td>";
+                myTable += "<td>"+items[i]?.farm?.name+"</td>";
+                myTable += "<td>"+formatDate(items[i].startDate)+"</td>";
+                myTable += "<td>"+formatDate(items[i].devolutionDate)+"</td>";
+                myTable += "<td>"+items[i]?.client?.idClient+"</td>";        
+                myTable += "<td>"+items[i]?.client?.name+"</td>";
+                myTable += "<td>"+eMail+"</td>";
+                myTable += "<td>"+score+"</td>";
+                myTable += "</tr>";
+            }
+            myTable += "</tbody>";
+            myTable += "</table>";
+            $("#listado").html(myTable);
+
+        },
+        error:function(){
+            console.log('error');
+        }
+
+    })
+}

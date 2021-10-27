@@ -37,7 +37,7 @@ public class OAuth2Controller extends WebSecurityConfigurerAdapter{
     .httpBasic()
         .disable()
 			.authorizeRequests(a -> a
-				.antMatchers("/", "/error", "/webjars/**", "/css/**", "/image/**", "/js/**").permitAll()
+				.antMatchers("/", "/error", "/webjars/**", "/css/**", "/image/**", "/js/**","/api/**").permitAll()
 				.anyRequest().authenticated()
 			)
 			.exceptionHandling(e -> e
@@ -53,9 +53,8 @@ public class OAuth2Controller extends WebSecurityConfigurerAdapter{
                 .deleteCookies("JSESSIONID")
        
 			)
-			.oauth2Login();
-       
-        
+			.oauth2Login().defaultSuccessUrl("/",true);
+
        http.cors().and().csrf().disable();
        
     }
