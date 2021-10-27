@@ -198,13 +198,11 @@ function ConteoReservas(){
             myTable += "<th>Reservas Completas</th>";
             myTable += "<th>Reservas Canceladas</th>";
             myTable += "</tr>";
-            myTable += "</thead><tbody>"
-            for(i=0;i<respuesta.length ;i++){       
-                myTable += "<tr>";
-                myTable += "<td>"+respuesta[i].completed+"</td>";
-                myTable += "<td>"+respuesta[i].cancelled+"</td>";
-                myTable += '</tr>';     
-            }
+            myTable += "</thead><tbody>"            
+            myTable += "<tr>";
+            myTable += "<td>"+respuesta.completed+"</td>";
+            myTable += "<td>"+respuesta.cancelled+"</td>";
+            myTable += '</tr>';                 
             myTable += "</tbody>";
             myTable += "</table>";
             $("#listado").html(myTable);
@@ -238,8 +236,8 @@ function clienteReservaTotal(){
             myTable += "</thead><tbody>"
             for(i=0;i<respuesta.length ;i++){       
                 myTable += "<tr>";
-                myTable += "<td>"+items[i]?.client?.idClient+"</td>";        
-                myTable += "<td>"+items[i]?.client?.name+"</td>";
+                myTable += "<td>"+respuesta[i]?.client?.idClient+"</td>";        
+                myTable += "<td>"+respuesta[i]?.client?.name+"</td>";
                 myTable += "<td>"+respuesta[i].total+"</td>";
                 myTable += '</tr>';     
             }
@@ -262,8 +260,8 @@ function listarReservasEntreFechas(){
         url: urlA,
         type: "GET",
         dataType:  "json",
-        success: function(items){
-            console.log(items);
+        success: function(respuesta){
+            console.log(respuesta);
             $("#listado").html("");
             
             let myTable = '<table class="table table-bordered">';
@@ -279,16 +277,16 @@ function listarReservasEntreFechas(){
             myTable += "<th>Calificación</th>";
             myTable += "</tr>";
             myTable += "</thead><tbody>"
-            for(i=0;i<items.length ;i++){
-                var score = (items[i]?.score)==null?"":items[i]?.score;
-                var eMail = (items[i]?.client?.email)==null?"":items[i]?.client?.email;        
+            for(i=0;i<respuesta.length ;i++){
+                var score = (respuesta[i]?.score)==null?"":respuesta[i]?.score;
+                var eMail = (respuesta[i]?.client?.email)==null?"":respuesta[i]?.client?.email;        
                 myTable += "<tr>";
-                myTable += "<td>"+items[i].idReservation+"</td>";
-                myTable += "<td>"+items[i]?.farm?.name+"</td>";
-                myTable += "<td>"+formatDate(items[i].startDate)+"</td>";
-                myTable += "<td>"+formatDate(items[i].devolutionDate)+"</td>";
-                myTable += "<td>"+items[i]?.client?.idClient+"</td>";        
-                myTable += "<td>"+items[i]?.client?.name+"</td>";
+                myTable += "<td>"+respuesta[i].idReservation+"</td>";
+                myTable += "<td>"+respuesta[i]?.farm?.name+"</td>";
+                myTable += "<td>"+formatDate(respuesta[i].startDate)+"</td>";
+                myTable += "<td>"+formatDate(respuesta[i].devolutionDate)+"</td>";
+                myTable += "<td>"+respuesta[i]?.client?.idClient+"</td>";        
+                myTable += "<td>"+respuesta[i]?.client?.name+"</td>";
                 myTable += "<td>"+eMail+"</td>";
                 myTable += "<td>"+score+"</td>";
                 myTable += "</tr>";
