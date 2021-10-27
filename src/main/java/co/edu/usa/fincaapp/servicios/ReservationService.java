@@ -132,8 +132,8 @@ public class ReservationService {
      * 
      * @return Retorna un listado de clientes y total reservas
      */
-    public List<ClientTotalRes> CountByClient(){
-        return reservaRepository.CountByClient();
+    public List<ClientTotalRes> countByClient(){
+        return reservaRepository.countByClient();
     }
 
     /**

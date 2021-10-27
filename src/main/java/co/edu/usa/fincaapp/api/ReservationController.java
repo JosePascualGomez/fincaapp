@@ -122,8 +122,8 @@ public class ReservationController {
      * @return Reorna el total de reservacioens por cliente y la info del mismo
      */
     @GetMapping("/report-clients")
-    public List<ClientTotalRes> CountByClient(){
-        return reservationService.CountByClient();
+    public List<ClientTotalRes> countByClient(){
+        return reservationService.countByClient();
     }
 
     /**

@@ -40,13 +40,13 @@ public interface ReservationCrudRepository extends CrudRepository<Reservation,Lo
      * @return Listado de clientes y su total de reservaciones
      */
     @Query(value = "SELECT new co.edu.usa.fincaapp.dto.ClientTotalRes(count(idReservation) as total, client) FROM Reservation GROUP BY client ORDER BY 1 desc")
-    List<ClientTotalRes> CountByClient();
+    List<ClientTotalRes> countByClient();
 
     /**
      * @return Listado de clientes y su total de reservaciones, usando interfaz com oDTO
      */
     @Query(value = "SELECT count(idReservation) as total, client FROM Reservation GROUP BY client ORDER BY 1")
-    List<ClientTotalResInter> CountByClientInter();
+    List<ClientTotalResInter> countByClientInter();
 
     /**
      * 
