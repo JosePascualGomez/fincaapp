@@ -86,8 +86,8 @@ public class ReservationRepository {
      * 
      * @return Reorna el total de reservacioens por cliente y la info del mismo
      */
-    public List<ClientTotalRes> CountByClient(){
-        return reservationCrudRepository.CountByClient();
+    public List<ClientTotalRes> countByClient(){
+        return reservationCrudRepository.countByClient();
     }
 
     /**
@@ -95,7 +95,7 @@ public class ReservationRepository {
      * @return Retorna el total de reservaciones por cliente y la info del mismo, usando interfaz coomo DTO
      */
     public List<ClientTotalResInter> countByClientInters(){
-        return reservationCrudRepository.CountByClientInter();
+        return reservationCrudRepository.countByClientInter();
     }
     
     /**
