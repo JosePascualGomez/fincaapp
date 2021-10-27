@@ -21,6 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.usa.fincaapp.entidades.Category;
 import co.edu.usa.fincaapp.servicios.CategoryService;
 
+/**
+ * @apiNote Expone los servicios propios de las categorias
+ * @author José Pascual Gómez Blanco
+ * @serial 24/10/2021
+ */
 @RestController
 @RequestMapping("api/Category")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET,RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT })

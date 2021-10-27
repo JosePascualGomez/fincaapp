@@ -1,8 +1,10 @@
 package co.edu.usa.fincaapp.api;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +19,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import co.edu.usa.fincaapp.dto.ClientTotalRes;
+import co.edu.usa.fincaapp.dto.ClientTotalResInter;
 import co.edu.usa.fincaapp.entidades.Reservation;
 import co.edu.usa.fincaapp.servicios.ReservationService;
 
@@ -62,5 +65,27 @@ public class ReservationController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteId(@PathVariable Long id) {
         reservationService.delete(id);        
+    }
+
+
+    @GetMapping(value="/report-dates/{first}/{finish}")
+    public List<Reservation> findBystartDateBetween(@PathVariable("first") @DateTimeFormat(pattern = "yyyy-MM-dd") Date  first, 
+                                                    @PathVariable("finish") @DateTimeFormat(pattern = "yyyy-MM-dd") Date finish){
+        return reservationService.findBystartDateBetween(first, finish);        
+    }
+
+    @GetMapping(value="/report-status")
+    public Object getCountStatus(){
+        return reservationService.getCountStatus();
+    }
+
+    @GetMapping("/report-clients")
+    public List<ClientTotalRes> CountByClient(){
+        return reservationService.CountByClient();
+    }
+
+    @GetMapping("/report-clients-Int")
+    public List<ClientTotalResInter> countByClientInters(){
+        return reservationService.countByClientInters();
     }
 }

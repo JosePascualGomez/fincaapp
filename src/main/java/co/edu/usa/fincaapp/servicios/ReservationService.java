@@ -1,5 +1,6 @@
 package co.edu.usa.fincaapp.servicios;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,10 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.usa.fincaapp.Repositorios.ReservationRepository;
+import co.edu.usa.fincaapp.dto.ClientTotalRes;
+import co.edu.usa.fincaapp.dto.ClientTotalResInter;
 import co.edu.usa.fincaapp.entidades.Reservation;
 
 /**
- *  @author José Pascual Gómez Blanco
+ * @apiNote Expone los servicios que dan acceso a los métodos del crud
+ * @author José Pascual Gómez Blanco
+ * @serial 21/10/2021
+ * @version 1.0
  */
 @Service
 public class ReservationService {
@@ -102,5 +108,39 @@ public class ReservationService {
         if (!oReservation.isEmpty()){
             reservaRepository.deleteReservation(oReservation.get());                        
         }        
+    }
+
+    /**
+     * Permite listar las reservaciones entre dos fechas
+     * @param first Fecha inicial
+     * @param finish Fecha Final
+     * @return Listado de Reservaciones
+     */
+    public List<Reservation> findBystartDateBetween(Date first, Date finish){
+        return reservaRepository.findBystartDateBetween(first, finish);
+    }
+
+    /**
+     * 
+     * @return Retorna la cantidad reservaciones completadas y canceladas
+     */
+    public Object getCountStatus(){
+        return reservaRepository.getCountStatus();
+    }
+
+    /**
+     * 
+     * @return Retorna un listado de clientes y total reservas
+     */
+    public List<ClientTotalRes> CountByClient(){
+        return reservaRepository.CountByClient();
+    }
+
+    /**
+     * 
+     * @return Retorna un listado de clientes y total reservas, usando interfaz como DTO
+     */
+    public List<ClientTotalResInter> countByClientInters(){
+        return reservaRepository.countByClientInters();
     }
 }
