@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 import co.edu.usa.fincaapp.Repositorios.ClientRepository;
 import co.edu.usa.fincaapp.entidades.Client;
 
+/**
+ * @apiNote Expone los servicios que dan acceso a los métodos del crud
+ * @author José Pascual Gómez Blanco
+ * @serial 21/10/2021
+ * @version 1.0
+ */
 @Service
 public class ClientService {
     @Autowired

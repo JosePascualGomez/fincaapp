@@ -116,8 +116,8 @@ public class ReservationService {
      * @param finish Fecha Final
      * @return Listado de Reservaciones
      */
-    public List<Reservation> findBystartDateBetween(Date first, Date finish){
-        return reservaRepository.findBystartDateBetween(first, finish);
+    public List<Reservation> findAllByStartDateBetween(Date first, Date finish){
+        return reservaRepository.findAllByStartDateBetween(first, finish);
     }
 
     /**

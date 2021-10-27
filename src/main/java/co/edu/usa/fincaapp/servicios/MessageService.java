@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 import co.edu.usa.fincaapp.Repositorios.MessageRepository;
 import co.edu.usa.fincaapp.entidades.Message;
 
+/**
+ * @apiNote Expone los servicios que dan acceso a los métodos del crud
+ * @author José Pascual Gómez Blanco
+ * @serial 21/10/2021
+ * @version 1.0
+ */
 @Service
 public class MessageService {
     @Autowired
